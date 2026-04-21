@@ -1,10 +1,11 @@
+import exception.MyException;
 import view.UserView;
 
 import java.util.Locale;
 import java.util.Scanner;
 
 public class TelBookMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyException {
         Scanner sc = new Scanner(System.in);
         //  UserView 인스턴스를 생성
         UserView userView = new UserView(sc);
