@@ -75,6 +75,9 @@ public class UserView {
     }
 
     public void update() {
+        System.out.println("수정할 ID : ");
+        int id = scanner.nextInt();
+
     }
 
     public void delete() {
