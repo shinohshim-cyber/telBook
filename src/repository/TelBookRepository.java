@@ -119,4 +119,26 @@ public class TelBookRepository {
         }
         return result;
     }
+
+    public void update(TelDto updateData) {
+        PreparedStatement psmt = null;
+        try{
+            String sql = "UPDATE telbook ";
+            sql += "set name = ?, ";
+            sql += "age = ?, ";
+            sql += "address = ?, ";
+            sql += "phone = ? ";
+            sql += "WHERE ID = ?";
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, updateData.getName());
+            psmt.setInt(2, updateData.getAge());
+            psmt.setString(3, updateData.getAddress());
+            psmt.setString(4, updateData.getTelNumber());
+            psmt.setLong(5, updateData.getId());
+            psmt.executeUpdate();
+            psmt.close();
+        }catch (Exception e){
+            System.out.println("UPDATE 오류 : " + e.getMessage() );
+        }
+    }
 }
