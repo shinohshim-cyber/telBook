@@ -187,4 +187,25 @@ public class UserView {
             list.forEach(x -> System.out.println(x));
         }
     }
+    //  검색을 선택하면, 1. 이름 2. 주소
+    //  를 선택하는 화면이 나온 후
+    //  검색 카테고리 선택 번호 : choice
+    //  keyword 값으로 받아서
+    //  검색기능을 실행
+    public void search() {
+        int choice = 0;
+        do{
+            System.out.println("1. 이름 2. 주소");
+            System.out.println("▶ 메뉴 입력 : ");
+            choice = scanner.nextInt();
+        }while(choice < 1 || choice > 2);
+        System.out.println("검색할 keyword : ");
+        String keyword = scanner.next();
+        List<TelDto> list = service.search(choice, keyword);
+        if(list.isEmpty()){
+            System.out.println("검색 결과가 없습니다.");
+        }else {
+            list.forEach(x -> System.out.println(x));
+        }
+    }
 }

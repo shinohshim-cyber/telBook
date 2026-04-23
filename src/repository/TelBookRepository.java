@@ -141,4 +141,39 @@ public class TelBookRepository {
             System.out.println("UPDATE 오류 : " + e.getMessage() );
         }
     }
+
+    public List<TelDto> search(int choice, String keyword) {
+        List<TelDto> dtoList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT * FROM telbook WHERE ";
+            if(choice == 1)
+                sql += "name";
+            else
+                sql += "address";
+            sql += " like ?";
+            String arg =  "%";
+            arg += keyword;
+            arg += "%";
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, arg);
+            rs = psmt.executeQuery();
+            while(rs.next()){
+                TelDto dto = new TelDto();
+                dto.setId(rs.getLong("id"));
+                dto.setName(rs.getString("name"));
+                dto.setAge(rs.getInt("age"));
+                dto.setAddress(rs.getString("address"));
+                dto.setTelNumber(rs.getString("phone"));
+                dtoList.add(dto);
+            }
+            psmt.close();
+            rs.close();
+        }catch (Exception e){
+            System.out.println("Search Error : " + e.getMessage());
+        }
+
+        return dtoList;
+    }
 }
